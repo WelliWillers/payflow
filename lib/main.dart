@@ -6,7 +6,8 @@ void main() {
   runApp(AppFirebase());
 }
 
-class AppFirebase extends StatefulWidget {@override
+class AppFirebase extends StatefulWidget {
+  @override
   State<AppFirebase> createState() => _AppFirebaseState();
 }
 
