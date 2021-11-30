@@ -11,7 +11,7 @@ class BoletoInfoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.primary,
+        color: AppColors.stroke,
         borderRadius: BorderRadius.circular(5),
       ),
       child: Padding(

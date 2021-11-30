@@ -16,6 +16,9 @@ class AppWidget extends StatelessWidget {
       DeviceOrientation.portraitDown,
       DeviceOrientation.portraitUp,
     ]);
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(statusBarColor: AppColors.primary),
+    );
   }
 
   @override
