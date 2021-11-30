@@ -4,12 +4,12 @@ class BarcodeScannerStatus {
   final bool isCameraAvailable;
   final String error;
   final String barcode;
-  final bool stopscanner;
+  final bool stopScanner;
 
 
   BarcodeScannerStatus({
     this.isCameraAvailable = false,
-    this.stopscanner = false,
+    this.stopScanner = false,
     this.error = "",
     this.barcode = "",
   });
@@ -17,19 +17,19 @@ class BarcodeScannerStatus {
   factory BarcodeScannerStatus.available() => 
       BarcodeScannerStatus(
         isCameraAvailable: true,
-        stopscanner: false,
+        stopScanner: false,
       );
 
   factory BarcodeScannerStatus.error(String message) => 
       BarcodeScannerStatus(
         error: message,
-        stopscanner: true,
+        stopScanner: true,
       );
 
   factory BarcodeScannerStatus.barcode(String barcode) => 
       BarcodeScannerStatus(
         barcode: barcode,
-        stopscanner: true,
+        stopScanner: true,
       );
 
   bool get showCamera => isCameraAvailable && error.isEmpty;

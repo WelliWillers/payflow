@@ -5,7 +5,7 @@ class UserModel {
   final String? photoURL;
 
   UserModel({required this.name, this.photoURL});
-
+  
   factory UserModel.fromMap(Map<String, dynamic> map){
     return UserModel(name: map["name"], photoURL: map["photoURL"]);
   }

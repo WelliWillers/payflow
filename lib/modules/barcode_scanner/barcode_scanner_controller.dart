@@ -8,9 +8,7 @@ import 'barcode_scanner_status.dart';
 class BarcodeScannerController {
   final statusNotifier =
       ValueNotifier<BarcodeScannerStatus>(BarcodeScannerStatus());
-
   BarcodeScannerStatus get status => statusNotifier.value;
-  
   set status(BarcodeScannerStatus status) => statusNotifier.value = status;
 
   final barcodeScanner = GoogleMlKit.vision.barcodeScanner();
@@ -36,7 +34,6 @@ class BarcodeScannerController {
 
   Future<void> scannerBarCode(InputImage inputImage) async {
     try {
-      
       final barcodes = await barcodeScanner.processImage(inputImage);
       var barcode;
       for (Barcode item in barcodes) {
@@ -51,7 +48,7 @@ class BarcodeScannerController {
 
       return;
     } catch (e) {
-      print("ERRO DA LEITURA: $e");
+      print("ERRO DA LEITURA $e");
     }
   }
 
@@ -63,10 +60,9 @@ class BarcodeScannerController {
 
   void scanWithCamera() {
     status = BarcodeScannerStatus.available();
-
     Future.delayed(Duration(seconds: 20)).then((value) {
-      if(status.hasBarcode == false)
-      status = BarcodeScannerStatus.error("Timeout de leitura de boleto");
+      if (status.hasBarcode == false)
+        status = BarcodeScannerStatus.error("Timeout de leitura de boleto");
     });
   }
 
@@ -74,15 +70,16 @@ class BarcodeScannerController {
     if (cameraController!.value.isStreamingImages == false)
       // ignore: curly_braces_in_flow_control_structures
       cameraController!.startImageStream((cameraImage) async {
-        if(status.stopscanner == false){
+        if (status.stopScanner == false) {
           try {
             final WriteBuffer allBytes = WriteBuffer();
             for (Plane plane in cameraImage.planes) {
               allBytes.putUint8List(plane.bytes);
             }
             final bytes = allBytes.done().buffer.asUint8List();
-            final Size imageSize =
-                Size(cameraImage.width.toDouble(), cameraImage.height.toDouble());
+            final Size imageSize = Size(
+                cameraImage.width.toDouble(), cameraImage.height.toDouble());
+            // ignore: prefer_const_declarations
             final InputImageRotation imageRotation =
                 InputImageRotation.Rotation_0deg;
             final InputImageFormat inputImageFormat =
@@ -106,8 +103,10 @@ class BarcodeScannerController {
             );
             final inputImageCamera = InputImage.fromBytes(
                 bytes: bytes, inputImageData: inputImageData);
-            await scannerBarCode(inputImageCamera);
+
+            scannerBarCode(inputImageCamera);
           } catch (e) {
+            // ignore: avoid_print
             print(e);
           }
         }
